@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+
+{% block title %}خانه{% endblock title %}
+
+{% block content %}
+<div class="col-8 mx-3">
+    {% for post in posts %}
+        <div class="container mt-5 p-4 shadow-lg">
+            <h2><a href="{% url "blogpost:detail" post.id %}" class="text-decoration-none text-info"> {{ post.title }}</a></h2>
+            <hr>
+            <p>{{post.description | truncatewords:5}}<a href="{% url "blogpost:detail" post.id %}" class="text-decoration-none text-info"><span> مطالعه بیشتر</span></a></p>
+            <hr>
+            <h6 class="text-muted small">نویسنده: {{post.author}}</h6>
+            <h6 class="text-muted small">🧡{{post.likes}}</h6>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock content %}
