@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}جزئیات {{ post.title }}{% endblock title %}
 
@@ -33,7 +34,7 @@
     <div class="container mt-5 p-4 shadow-lg">
         <form method="post" action="" >
             {% csrf_token %}
-            <div class="form-row">
+            <!-- <div class="form-row">
                 <div class="form-group col-md-5">
                     <label for="name">نام</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="نام"
@@ -75,7 +76,10 @@
             </div>
             <div class="form-group">
                 <textarea class="w-100 form-control mt-3" rows="6" name="comment" id="inputtext" placeholder="به نظر من ..." required></textarea>
-            </div>
+            </div> -->
+            <table>
+                {{form | crispy }}
+            </table>
             <button type="submit" class="btn btn-outline-success mt-4 me-4">ارسال نظر</button>
         </form>
     </div>

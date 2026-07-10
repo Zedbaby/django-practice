@@ -1,6 +1,7 @@
 from django.shortcuts import render , get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import BlogPost , Comment
+from .forms import BlogPostCommentForm
 
 def HomePage(request):
     Posts = BlogPost.objects.all().order_by("-likes")
@@ -14,27 +15,15 @@ def DetailPage(request , pk):
     post = get_object_or_404(BlogPost , pk=pk)
     comments = Comment.objects.filter(post=post)
 
+    form = BlogPostCommentForm()
     if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email" , None)
-        address = request.POST.get("address" , "")
-        city = request.POST.get("city" , "")
-        province = request.POST.get("state" , "")
-        hide_name = request.POST.get("hide_name" , "")
-        hide_name = True if hide_name else False
-        comment = request.POST.get("comment")
-
-        Comment.objects.create(
-            nickname=name,
-            email=email,
-            address=address,
-            city=city,
-            province=province,
-            hide_name=hide_name,
-            comment=comment,
-            post=post
-        )
-    context = {'post': post , "comments" : comments}
+        form = BlogPostCommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            form = BlogPostCommentForm()
+    context = {'post': post , "comments" : comments , "form" : form}
     return render(request , "detail/detail.html" , context)
 
 def RecentPost(request):
