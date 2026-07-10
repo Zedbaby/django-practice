@@ -42,9 +42,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'password_change' %}"><span class="text-primary">تغییر رمز عبور</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:change_user_info' %}"><span class="text-primary">تغییر اطلاعات</span></a>
+                </li>
                 {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'login' %}"><span class="text-primary">وارد شوید</span> </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:signup' %}"><span class="text-primary">ثبت نام کنید</span> </a>
                 </li>
                 {% endif %}
                 
