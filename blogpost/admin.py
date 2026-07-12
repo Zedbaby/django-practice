@@ -20,8 +20,12 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = [
     "nickname",
     "email" ,
-    "city",
+    "comment",
     "post",
-    "datetime_created"
+    "datetime_created",
+    "state"
+    ]
+    list_editable = [
+        "state",
     ]
     

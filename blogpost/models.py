@@ -16,6 +16,15 @@ class BlogPost(models.Model):
 
 
 class Comment(models.Model):
+    STATE_CHOICES_APPROVED = "a"
+    STATE_CHOICES_REJECTED = "r"
+    STATE_CHOICES_PERDING = "p"
+    STATE_CHOICES = (
+        (STATE_CHOICES_APPROVED ,"تایید شده"),
+        (STATE_CHOICES_REJECTED ,"رد شده"),
+        (STATE_CHOICES_PERDING ,"در حال بررسی"),
+    )
+
     PROVINCE_CHOICES = (
         ("kh razavi","خراسان رضوی"),
         ("Tehran","تهران"),
@@ -31,3 +40,5 @@ class Comment(models.Model):
     datetime_created = models.DateTimeField(auto_now_add=True, verbose_name="زمان ایجاد")
     datetime_modified = models.DateTimeField(auto_now=True, verbose_name="زمان ویرایش")
     post = models.ForeignKey(to=BlogPost , on_delete=models.CASCADE, verbose_name="پست مربوطه")
+    # برای تایید کردن نظرات که ایا قابل نمایش هست یا خیر
+    state = models.CharField(max_length=1 , default=STATE_CHOICES_PERDING , verbose_name="وضعیت کامنت" , choices=STATE_CHOICES)

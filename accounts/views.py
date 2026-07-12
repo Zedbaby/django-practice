@@ -16,7 +16,7 @@ def signup(request):
 def change_user_info(request):
     form = ChangeUserForm()
     if request.method == "POST":
-        form = ChangeUserForm(request.POST)
+        form = ChangeUserForm(request.POST , instance=request.user)
         if form.is_valid:
             form.save()
             return redirect("blogpost:home")
