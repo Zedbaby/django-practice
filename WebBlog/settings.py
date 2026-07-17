@@ -146,3 +146,8 @@ EMAIL_HOST_PASSWORD = 'APP_PASSWORD'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 ####################  End CRYSPY FORM  #####################
+
+####################  MEDIA FILES  #####################
+MEDIA_URL = "/media/"
+MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
+####################  END MEDIA FILES  #####################

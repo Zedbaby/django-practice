@@ -10,6 +10,7 @@ class BlogPost(models.Model):
     datetime_modified = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(to=get_user_model(), on_delete=models.CASCADE , related_name="blogposts")
     likes = models.ManyToManyField(to=get_user_model(),related_name="blogposts_likes" , blank=True)
+    picture = models.ImageField(upload_to="picture" , blank=True , null=True)
 
     def __str__(self):
         return f" {self.title}"

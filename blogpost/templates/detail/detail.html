@@ -8,6 +8,10 @@
     <div class="container mt-5 p-4 shadow-lg">
         <h1><a href="#" class="text-decoration-none text-info">{{ post.title }}</a></h1>
         <hr>
+        {% if post.picture %}
+        <img src="{{post.picture.url}}" alt="picture" width="300">
+        <hr>
+        {% endif %}
         <p>{{ post.description }}</p>
         <hr>
         <h6 class="text-muted small">نویسنده: {{ post.author }}</h6>
