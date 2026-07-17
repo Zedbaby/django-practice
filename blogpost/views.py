@@ -62,7 +62,6 @@ def test_func(user , *args , **kwargs ):
     pk = kwargs.get('pk')
     post = get_object_or_404(BlogPost , pk=pk)
     return user == post.author
-
 @post_owner_required
 def DeletePost(request, pk):
     post = get_object_or_404(BlogPost , pk=pk)
@@ -79,8 +78,10 @@ def UpdatePost(request , pk):
     if request.method == "POST":
         title = request.POST.get("title")
         description = request.POST.get("description")
+        picture = request.FILES.get("picture")
         post.title = title
         post.description = description
+        post.picture = picture
         post.save()
         return redirect("blogpost:home")
 
@@ -100,12 +101,14 @@ def AddPost(request):
     if request.method == "POST":
         name = request.POST.get("name")
         description = request.POST.get("description")
+        picture = request.FILES.get("picture")
         author = request.user
 
         newpost = BlogPost.objects.create(
             title=name ,
             description=description ,
             author=author ,
+            picture = picture
         )
         newpost.save()
         return redirect("blogpost:home")
