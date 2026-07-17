@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BlogPost , Comment
+from .models import BlogPost , Comment 
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
@@ -8,11 +8,13 @@ class BlogPostAdmin(admin.ModelAdmin):
     "title",
     "datetime_created" ,
     "datetime_modified",
-    "likes",
     "author",
     ]
     list_display_links = [
         "title",
+    ]
+    filter_horizontal = [
+        "likes",
     ]
 
 @admin.register(Comment)
